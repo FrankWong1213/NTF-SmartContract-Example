@@ -1357,7 +1357,7 @@ pragma solidity ^0.8.2;
         uint256 public constant PRICE_PER_TOKEN = 0.01 ether;
 
 
-        constructor() ERC721("Solar1", "ar1") {}
+        constructor() ERC721("Solar9", "ar9") {}
 
         function setBaseURI(string memory baseURI_) external onlyOwner() {
             _baseURIextended = baseURI_;
@@ -1396,6 +1396,10 @@ pragma solidity ^0.8.2;
             require(PRICE_PER_TOKEN  <= msg.value, "Ether value sent is not correct");
             _mint(msg.sender, _tokenId);
         }
+        function withdraw() public onlyOwner {
+            uint balance = address(this).balance;
+            payable(msg.sender).transfer(balance);
+        }   
     // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId)
